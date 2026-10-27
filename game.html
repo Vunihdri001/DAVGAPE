@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME | Jogar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" class="nav-hover-item" title="Início">
+                <img src="assets/img/Logo.png" class="nav-logo" alt="Logo">
+            </a>
+            <a href="game.html" class="nav-hover-item">
+                GAME
+            </a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="achievements.html" class="nav-hover-item">
+                Achievements
+            </a>
+
+            <a href="dashboard.html" class="nav-hover-item">
+                <span class="user-avatar-small" id="navAvatar"></span>
+                <span id="navUserNome">User Name</span>
+            </a>
+
+            <div class="nav-volume">
+                <img src="assets/img/audio.png" id="btnVolumeToggle" class="btn-volume-toggle" alt="Volume">
+                <div id="volumeMenu" class="volume-menu">
+                    <input type="range" id="volumeSlider" min="0" max="100" step="1" value="50" aria-label="Volume">
+                    <span id="volumeValor">50%</span>
+                </div>
+            </div>
+
+            <div class="nav-settings">
+                <img src="assets/img/setting.png" id="btnSettingsToggle" class="btn-settings-toggle" alt="Configurações">
+                <div id="settingsMenu" class="settings-menu">
+                    <button id="btnRenomear" class="menu-item">Renomear</button>
+                    <button id="btnDeletarSave" class="menu-item delete">Deletar Progresso</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="tela-jogo-wrap" style="margin: 0 auto; padding: 32px 24px;">
+
+        <!-- ===================== TELA 1: escolha de dificuldade/matéria ===================== -->
+        <section id="telaSetup">
+            <h1 class="setup-titulo">Monte sua partida</h1>
+            <p class="setup-subtitulo">
+                Escolha a dificuldade e a matéria. Quanto mais difícil, menos tempo
+                por questão e mais pontos por acerto.
+            </p>
+
+            <div class="setup-grid">
+                <div class="section-box setup-coluna">
+                    <h2>Dificuldade</h2>
+                    <p class="dica">Questões · tempo por questão · multiplicador de pontos</p>
+                    <div id="opcoesDificuldade" class="lista-opcoes"></div>
+                </div>
+                <div class="section-box setup-coluna">
+                    <h2>Matéria</h2>
+                    <p class="dica">Questões disponíveis no banco atual</p>
+                    <div id="opcoesMateria" class="lista-opcoes"></div>
+                </div>
+            </div>
+
+            <p class="setup-aviso" id="setupAviso"></p>
+            <div class="setup-rodape">
+                <button id="btnIniciarPartida" class="btn-primary" disabled>Começar</button>
+            </div>
+
+            <!-- modo livre / debug: fica discreto, no canto inferior da seleção -->
+            <div class="setup-debug-gatilho">
+                <button type="button" id="btnAbrirModoDebug">🔧 Modo livre (debug): testar uma questão específica</button>
+            </div>
+            <div class="setup-debug-painel oculto" id="painelModoDebug">
+                <div class="setup-debug-painel__linha">
+                    <div>
+                        <label for="debugAno">Ano</label>
+                        <select id="debugAno"></select>
+                    </div>
+                    <div>
+                        <label for="debugQuestao">Questão</label>
+                        <select id="debugQuestao"></select>
+                    </div>
+                    <button type="button" id="btnTestarQuestao" class="btn-primary" disabled>Testar questão</button>
+                </div>
+                <p class="dica">O modo livre não dá XP nem conta pra conquistas — é só pra conferir se a questão e o gabarito estão certos.</p>
+            </div>
+        </section>
+
+        <!-- ===================== TELA 2: pergunta em andamento ===================== -->
+        <section id="telaJogo" style="display:none;">
+            <div class="jogo-header">
+                <div class="progresso-jogo">
+                    <div class="progresso-texto" id="jogoProgressoTexto">Questão 1/5</div>
+                    <div class="barra-progresso">
+                        <div class="barra-progresso-preenchimento" id="jogoProgressoBarra" style="width:0%"></div>
+                    </div>
+                </div>
+                <span class="badge-debug oculto" id="badgeModoDebug">🔧 Modo debug</span>
+                <div class="metricas-jogo" id="metricasJogo">
+                    <div class="metrica-item metrica-tempo" id="metricaTempo">
+                        <div class="metrica-valor" id="valorTempo">--</div>
+                        <div class="metrica-label">tempo</div>
+                    </div>
+                    <div class="metrica-item metrica-pontos">
+                        <div class="metrica-valor" id="valorPontos">0</div>
+                        <div class="metrica-label">pontos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="questao-card">
+                <span class="questao-tag" id="questaoTag"></span>
+                <div class="questao-contexto" id="questaoContexto"></div>
+                <img id="questaoImagem" class="questao-imagem" style="display:none;" alt="Imagem de apoio da questão">
+                <p class="questao-pergunta" id="questaoPergunta"></p>
+            </div>
+
+            <div class="alternativas-grid" id="alternativas">
+                <button type="button" id="btnConfirmar" class="btn-confirmar-grade" disabled>Confirmar</button>
+            </div>
+
+            <div class="jogo-footer">
+                <span class="feedback-jogo" id="jogoFeedback"></span>
+                <button type="button" id="btnVoltarDebug" class="btn-secundario oculto">Voltar à seleção</button>
+            </div>
+        </section>
+
+        <!-- ===================== TELA 3: resultado final ===================== -->
+        <section id="telaResultado" style="display:none;">
+            <div class="resultado-card">
+                <p style="margin-bottom:0;">Pontuação final</p>
+                <div class="resultado-pontos" id="resultadoPontos">0</div>
+                <div class="resultado-stats">
+                    <div>
+                        <div class="resultado-stat-valor" id="resultadoAcertos">0/0</div>
+                        <div class="resultado-stat-label">acertos</div>
+                    </div>
+                    <div>
+                        <div class="resultado-stat-valor" id="resultadoMateria">—</div>
+                        <div class="resultado-stat-label">matéria</div>
+                    </div>
+                    <div>
+                        <div class="resultado-stat-valor" id="resultadoDificuldade">—</div>
+                        <div class="resultado-stat-label">dificuldade</div>
+                    </div>
+                </div>
+                <div class="resultado-acoes">
+                    <button id="btnJogarNovamente" class="btn-primary">Jogar novamente</button>
+                    <a href="dashboard.html" class="btn-link">Ver dashboard</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/sistema.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

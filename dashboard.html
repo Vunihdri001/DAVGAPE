@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" class="nav-hover-item" title="Início">
+                <img src="assets/img/Logo.png" class="nav-logo" alt="Logo">
+            </a>
+            <a href="game.html" class="nav-hover-item">
+                GAME
+            </a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="achievements.html" class="nav-hover-item">
+                Achievements
+            </a>
+
+            <a href="dashboard.html" class="nav-hover-item">
+                <span class="user-avatar-small" id="navAvatar"></span>
+                <span id="navUserNome">User Name</span>
+            </a>
+
+            <div class="nav-volume">
+                <img src="assets/img/audio.png" id="btnVolumeToggle" class="btn-volume-toggle" alt="Volume">
+                <div id="volumeMenu" class="volume-menu">
+                    <input type="range" id="volumeSlider" min="0" max="100" step="1" value="50" aria-label="Volume">
+                    <span id="volumeValor">50%</span>
+                </div>
+            </div>
+
+            <div class="nav-settings">
+                <img src="assets/img/setting.png" id="btnSettingsToggle" class="btn-settings-toggle" alt="Configurações">
+                <div id="settingsMenu" class="settings-menu">
+                    <button id="btnRenomear" class="menu-item">Renomear</button>
+                    <button id="btnDeletarSave" class="menu-item delete">Deletar Progresso</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-grid">
+        <!-- cartão de perfil: nome, nível e conquistas em destaque -->
+        <section class="profile-card">
+            <div class="profile-avatar-wrap">
+                <button type="button" class="profile-avatar-large" id="perfilAvatar" title="Trocar foto de perfil" aria-label="Trocar foto de perfil"></button>
+                <button type="button" class="profile-avatar-editar" id="btnEditarAvatar" title="Trocar foto de perfil" aria-label="Trocar foto de perfil">✏️</button>
+                <input type="file" id="inputAvatar" class="input-arquivo-oculto" accept="image/*">
+            </div>
+            <div class="profile-info">
+                <div class="profile-info__topo">
+                    <h2 id="perfilNome">Jogador</h2>
+                    <span class="profile-nivel" id="perfilNivel">Nível 1</span>
+                </div>
+                <div class="profile-barra-xp">
+                    <div class="profile-barra-xp__preenchimento" id="perfilBarraXp" style="width:0%"></div>
+                </div>
+                <p class="profile-xp-texto" id="perfilXpTexto">0 / 120 XP</p>
+            </div>
+            <div class="profile-destaques">
+                <div class="profile-destaques__cabecalho">
+                    <span>Conquistas em destaque</span>
+                    <a href="achievements.html" class="link-claro">Escolher</a>
+                </div>
+                <div class="profile-destaques__grade" id="perfilConquistasFixadas"></div>
+            </div>
+        </section>
+
+        <div class="dashboard-sections-grid">
+            <!-- últimos desafios jogados -->
+            <div class="section-box">
+                <h3>Últimos desafios</h3>
+                <ul class="history-list" id="listaHistorico"></ul>
+            </div>
+
+            <!-- melhor resultado por matéria + dificuldade -->
+            <div class="section-box">
+                <h3>Melhores resultados</h3>
+                <ul class="history-list" id="listaMelhores"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/sistema.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

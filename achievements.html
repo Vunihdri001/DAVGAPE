@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME | Conquistas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" class="nav-hover-item" title="Início">
+                <img src="assets/img/Logo.png" class="nav-logo" alt="Logo">
+            </a>
+            <a href="game.html" class="nav-hover-item">
+                GAME
+            </a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="achievements.html" class="nav-hover-item">
+                Achievements
+            </a>
+
+            <a href="dashboard.html" class="nav-hover-item">
+                <span class="user-avatar-small" id="navAvatar"></span>
+                <span id="navUserNome">User Name</span>
+            </a>
+
+            <div class="nav-volume">
+                <img src="assets/img/audio.png" id="btnVolumeToggle" class="btn-volume-toggle" alt="Volume">
+                <div id="volumeMenu" class="volume-menu">
+                    <input type="range" id="volumeSlider" min="0" max="100" step="1" value="50" aria-label="Volume">
+                    <span id="volumeValor">50%</span>
+                </div>
+            </div>
+
+            <div class="nav-settings">
+                <img src="assets/img/setting.png" id="btnSettingsToggle" class="btn-settings-toggle" alt="Configurações">
+                <div id="settingsMenu" class="settings-menu">
+                    <button id="btnRenomear" class="menu-item">Renomear</button>
+                    <button id="btnDeletarSave" class="menu-item delete">Deletar Progresso</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main style="max-width:1120px; margin:0 auto; padding:32px 24px;">
+        <h1 style="margin-bottom:6px;">Conquistas</h1>
+        <p id="resumoConquistas" style="margin-bottom:0;"></p>
+        <p class="dica" style="margin-top:6px;">Escolha até 3 pra destacar no seu perfil — clique em "Fixar" numa conquista já desbloqueada.</p>
+        <p id="avisoFixar" class="aviso-fixar"></p>
+
+        <div id="categoriasConquistas"></div>
+    </main>
+
+    <script src="js/sistema.js"></script>
+    <script src="js/navegacao.js"></script>
+    <script src="js/conquista.js"></script>
+</body>
+</html>
