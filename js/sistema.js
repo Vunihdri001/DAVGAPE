@@ -268,7 +268,7 @@ const MAX_TENTATIVAS_ERRADAS = 3;
 const GameEngine = (() => {
 
   const ARQUIVOS_DE_QUESTOES = [
-    //'data/enem_2021.json',
+    'data/enem_2021.json',
     'data/enem_2022.json',
     'data/enem_2023.json',
     //'data/enem_2024.json',
