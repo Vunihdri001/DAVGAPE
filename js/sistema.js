@@ -271,7 +271,7 @@ const GameEngine = (() => {
     'data/enem_2021.json',
     'data/enem_2022.json',
     'data/enem_2023.json',
-    //'data/enem_2024.json',
+    'data/enem_2024.json',
   ];
 
   let todasQuestoes = [];
